@@ -13,7 +13,7 @@ public class Stamp extends BaseEntity {
 
     private String name;
     private String description;
-    @OneToMany
+    @ManyToOne
     private Paper paper;
     private BigDecimal price;
     private String imageURL;

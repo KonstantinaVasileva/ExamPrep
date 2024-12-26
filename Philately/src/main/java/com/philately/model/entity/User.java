@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
@@ -11,9 +13,9 @@ public class User extends BaseEntity {
     private String password;
     private String email;
     @OneToMany
-    private Stamp wishedStamp;
+    private Set<Stamp> wishedStamp;
     @OneToMany
-    private Stamp purchasedStamp;
+    private Set<Stamp> purchasedStamp;
 
     public String getUsername() {
         return username;
@@ -42,21 +44,19 @@ public class User extends BaseEntity {
         return this;
     }
 
-    public Stamp getWishedStamp() {
+    public Set<Stamp> getWishedStamp() {
         return wishedStamp;
     }
 
-    public User setWishedStamp(Stamp wishedStamp) {
+    public void setWishedStamp(Set<Stamp> wishedStamp) {
         this.wishedStamp = wishedStamp;
-        return this;
     }
 
-    public Stamp getPurchasedStamp() {
+    public Set<Stamp> getPurchasedStamp() {
         return purchasedStamp;
     }
 
-    public User setPurchasedStamp(Stamp purchasedStamp) {
+    public void setPurchasedStamp(Set<Stamp> purchasedStamp) {
         this.purchasedStamp = purchasedStamp;
-        return this;
     }
 }
