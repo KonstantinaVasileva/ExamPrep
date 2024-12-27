@@ -1,9 +1,7 @@
 package com.philately.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import com.philately.model.enums.PaperType;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
@@ -11,11 +9,16 @@ import java.math.BigDecimal;
 @Table(name = "stamps")
 public class Stamp extends BaseEntity {
 
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String description;
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Paper paper;
+    @Column(nullable = false)
     private BigDecimal price;
+    @Column(nullable = false)
     private String imageURL;
     @ManyToOne
     private User owner;
