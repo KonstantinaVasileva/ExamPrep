@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 
 public class UserRegistrationDTO {
+    private long id;
     @Size(min = 3, max = 20, message = "{register.user.username}")
     private String username;
     @Size(min = 3, max = 20, message = "{register.user.password}")
@@ -15,6 +16,13 @@ public class UserRegistrationDTO {
     private String email;
     private boolean passwordEquals;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;

@@ -14,16 +14,18 @@
     <nav>
         <div class="home">
             <a href="/">Philately App</a>
+            <li th:if="${@currentUser.loggedIn}">
             <a href="/">Add Stamp</a>
+            </li>
         </div>
         <div class="links">
-            <li>
+            <li th:unless="${@currentUser.loggedIn}">
                 <a href="/users/login">Login</a>
             </li>
-            <li>
+            <li th:unless="${@currentUser.loggedIn}">
                 <a href="/users/register">Register</a>
             </li>
-            <li>
+            <li th:if="${@currentUser.loggedIn}">
                 <a href="/">Logout</a>
             </li>
         </div>
