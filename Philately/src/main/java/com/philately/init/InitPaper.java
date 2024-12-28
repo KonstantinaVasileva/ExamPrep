@@ -28,7 +28,10 @@ public class InitPaper implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         if (paperRepository.count() == 0) {
-
+            for (PaperType paperType : paperTypeMap.keySet()) {
+                Paper paper = new Paper(paperType, paperTypeMap.get(paperType));
+                paperRepository.save(paper);
+            }
         }
 
     }

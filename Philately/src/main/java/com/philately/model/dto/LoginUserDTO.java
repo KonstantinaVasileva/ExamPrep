@@ -3,9 +3,10 @@ package com.philately.model.dto;
 import jakarta.validation.constraints.Size;
 
 public class LoginUserDTO {
-    @Size(min = 3, max = 20)
+
+    @Size(min = 3, max = 20, message = "{register.user.username}")
     private String username;
-    @Size(min = 3, max = 20)
+    @Size(min = 3, max = 20, message = "{register.user.password}")
     private String password;
 
     public String getUsername() {

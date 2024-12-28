@@ -1,5 +1,6 @@
 package com.philately.service.impl;
 
+import com.philately.model.dto.LoginUserDTO;
 import com.philately.model.dto.UserRegistrationDTO;
 import com.philately.model.entity.User;
 import com.philately.repository.UserRepository;
@@ -32,23 +33,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean userLogin(UserRegistrationDTO userRegistrationDTO) {
-        User user = userRepository.findById(userRegistrationDTO.getId()).orElse(null);
+    public boolean userLogin(LoginUserDTO loginUserDTO) {
+        User user = userRepository.findByUsername(loginUserDTO.getUsername()).orElse(null);
         if (user == null ||
-                userRegistrationDTO.getPassword() == null ||
-                user.getPassword() == null){
-            return true;
+                loginUserDTO.getPassword() == null ||
+                user.getPassword() == null) {
+            return false;
         }
 
-        boolean equals = user.getPassword().equals(passwordEncoder.encode(userRegistrationDTO.getPassword()));
+        boolean equals = user.getPassword().equals(passwordEncoder.encode(loginUserDTO.getPassword()));
 
         if (equals) {
             currentUser.setUsername(user.getUsername());
             currentUser.setLoggedIn(true);
-            return true;
-        }
+//            return true;
+        } else {
 
-        currentUser.logout();
+            currentUser.logout();
+        }
         return false;
     }
 
