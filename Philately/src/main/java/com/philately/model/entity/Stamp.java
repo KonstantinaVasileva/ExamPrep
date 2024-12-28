@@ -1,6 +1,5 @@
 package com.philately.model.entity;
 
-import com.philately.model.enums.PaperType;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
