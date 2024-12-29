@@ -26,32 +26,39 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void userRegistration(UserRegistrationDTO userRegistrationDTO) {
+    public boolean userRegistration(UserRegistrationDTO userRegistrationDTO) {
+        if (!userRegistrationDTO.getPassword().equals(userRegistrationDTO.getConfirmPassword())) {
+            return false;
+        }
+        if (userRepository.existsByUsernameOrEmail(userRegistrationDTO.getUsername(), userRegistrationDTO.getEmail())) {
+            return false;
+        }
         User user = modelMapper.map(userRegistrationDTO, User.class);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+        return true;
     }
 
     @Override
     public boolean userLogin(LoginUserDTO loginUserDTO) {
         User user = userRepository.findByUsername(loginUserDTO.getUsername()).orElse(null);
-        if (user == null ||
-                loginUserDTO.getPassword() == null ||
-                user.getPassword() == null) {
+        if (user == null) {
             return false;
         }
 
-        boolean equals = user.getPassword().equals(passwordEncoder.encode(loginUserDTO.getPassword()));
+        boolean equals = passwordEncoder.matches(loginUserDTO.getPassword(), user.getPassword());
 
         if (equals) {
             currentUser.setUsername(user.getUsername());
             currentUser.setLoggedIn(true);
-//            return true;
-        } else {
-
-            currentUser.logout();
+            return true;
         }
         return false;
+    }
+
+    @Override
+    public void userLogout() {
+        currentUser.logout();
     }
 
 

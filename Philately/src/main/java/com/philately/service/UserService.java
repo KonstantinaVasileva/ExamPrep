@@ -5,7 +5,10 @@ import com.philately.model.dto.UserRegistrationDTO;
 
 public interface UserService {
 
-    void userRegistration(UserRegistrationDTO userRegistrationDTO);
+    boolean userRegistration(UserRegistrationDTO userRegistrationDTO);
 
     boolean userLogin(LoginUserDTO loginUserDTO);
+
+    void userLogout();
+
 }

@@ -19,7 +19,7 @@
 
             <input
                     th:field="*{username}"
-
+                    th:errorclass="'is-invalid'"
                     type="text" class="form-control" id="username" name="username"
                     placeholder="Enter your username" />
             <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="bg-danger text-light rounded" style="font-size: 15px">Username error message</small>
@@ -31,7 +31,10 @@
             </div>
             <input
                     th:field="*{email}"
-                    type="text" class="form-control" id="email" name="email"
+                    type="text"
+                    class="form-control"
+                    id="email"
+                    name="email"
                     placeholder="Email"/>
             <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="bg-danger text-light rounded" style="font-size: 15px">Email error message</small>
 <!--            <small class="bg-danger text-light rounded">Email error message</small>-->
@@ -43,9 +46,9 @@
             </div>
             <input
                     th:field="*{password}"
-                    th:errorclass="is-invalid"
                     type="password" class="form-control" id="password" name="password"
                     placeholder="Enter Password" />
+            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="bg-danger text-light rounded" style="font-size: 15px">Email error message</small>
 <!--            <small class="bg-danger text-light rounded">Password error message</small>-->
         </div>
 
@@ -56,11 +59,12 @@
             <input
                     th:field="*{confirmPassword}"
                     type="password"
-                    th:unless="${#fields.hasErrors('confirmPassword')}"
                     class="form-control"
                     id="confirmPassword"
                     name="confirmPassword"
+
                      placeholder="Confirm Password"/>
+            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="bg-danger text-light rounded" style="font-size: 15px">Email error message</small>
 <!--                    th:unless="${#fields.hasErrors('confirmPassword')}"-->
 
 <!--            <small class="bg-danger text-light rounded">Password error message</small>-->

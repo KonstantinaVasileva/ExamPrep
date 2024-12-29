@@ -14,7 +14,7 @@ public class UserRegistrationDTO {
     private String confirmPassword;
     @Email(message = "{register.user.email}")
     private String email;
-    private boolean passwordEquals;
+
 
     public String getUsername() {
         return username;
@@ -48,8 +48,4 @@ public class UserRegistrationDTO {
         this.email = email;
     }
 
-    @AssertTrue(message = "Passwords should match")
-    public boolean isPasswordsEqual() {
-        return password.equals(confirmPassword);
-    }
 }

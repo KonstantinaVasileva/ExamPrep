@@ -35,9 +35,10 @@ public class RegisterController {
     @PostMapping("/register")
     public String registerUser(@Valid UserRegistrationDTO userRegistrationDTO,
                                BindingResult bindingResult,
-                               Model model,
                                RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
+
+        boolean registration = userService.userRegistration(userRegistrationDTO);
+        if (bindingResult.hasErrors() || !registration) {
             redirectAttributes.addFlashAttribute(
                     "userRegistrationDTO", userRegistrationDTO);
             redirectAttributes.addFlashAttribute(
@@ -45,13 +46,13 @@ public class RegisterController {
             return "redirect:/users/register";
         }
 
-        if (userRegistrationDTO.isPasswordsEqual()) {
-            userService.userRegistration(userRegistrationDTO);
-        } else {
-            model.addAttribute("error", "Passwords do not match");
-            return "register";
-        }
-        return "redirect:/";
+//        if (userRegistrationDTO.isPasswordsEqual()) {
+//            userService.userRegistration(userRegistrationDTO);
+//        } else {
+//            model.addAttribute("error", "Passwords do not match");
+//            return "register";
+//        }
+        return "redirect:/users/login";
     }
 
 }

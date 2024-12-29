@@ -15,7 +15,7 @@
         <div class="home">
             <a href="/">Philately App</a>
             <li th:if="${@currentUser.loggedIn}">
-            <a href="/">Add Stamp</a>
+            <a href="/stamps/add">Add Stamp</a>
             </li>
         </div>
         <div class="links">
@@ -26,7 +26,7 @@
                 <a href="/users/register">Register</a>
             </li>
             <li th:if="${@currentUser.loggedIn}">
-                <a href="/">Logout</a>
+                <a href="/users/logout">Logout</a>
             </li>
         </div>
     </nav>
