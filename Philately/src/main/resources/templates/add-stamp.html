@@ -8,39 +8,76 @@
     <form
             class="welcome add-offer-form"
             th:method="post"
-            action="/stamps/add">
+            th:object="${stampDTO}"
+            th:action="@{/stamps/add}">
     <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add stamp</span></h1>
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
-                <label for="name" class="h4 mb-2">Name</label>
+                <label th:for="name" class="h4 mb-2">Name</label>
             </div>
-            <input type="text" class="form-control" id="name" name="name"/>
-            <small class="bg-danger text-light rounded">Name error message</small>
+            <input
+                    th:field="*{name}"
+                    th:errorclass="'is-invalid alert-danger'"
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    name="name"/>
+            <small
+                    th:each="error: ${#fields.errors('name')}"
+                    th:text="${error}"
+                    class="invalid-feedback errors alert alert-light"
+            >Name error message</small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
-                <label for="description" class="h4 mb-2">Description</label>
+                <label th:for="description" class="h4 mb-2">Description</label>
             </div>
-            <input type="text"  class="form-control" id="description" name="description"/>
-            <small class="bg-danger text-light rounded">Description error message</small>
+            <input
+                    th:field="*{description}"
+                    th:errorclass="'is-invalid alert-danger'"
+                    type="text"
+                   class="form-control"
+                   id="description"
+                   name="description"/>
+            <small th:each="error: ${#fields.errors('description')}"
+                   th:text="${error}"
+                    class="invalid-feedback text-danger">Description error message</small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
-                <label for="imageUrl" class="h4 mb-2">Image URL</label>
+                <label th:for="imageUrl" class="h4 mb-2">Image URL</label>
             </div>
-            <textarea type="text" class="form-control" id="imageUrl" name="imageUrl"></textarea>
-            <small class="bg-danger text-light rounded">Image URL error message</small>
+            <textarea
+                    th:field="*{imageURL}"
+                    th:errorclass="'is-invalid'"
+                    type="text"
+                      class="form-control"
+                      id="imageUrl"
+                      name="imageUrl"></textarea>
+            <small
+                    th:each="error: ${#fields.errors('imageURL')}"
+                    th:text="${error}"
+                    class="invalid-feedback text-danger">Image URL error message</small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
-                <label for="price" class="h4 mb-2">Price</label>
+                <label th:for="price" class="h4 mb-2">Price</label>
             </div>
-            <input type="number" class="form-control" id="price" name="price"/>
-            <small class="bg-danger text-light rounded">Price error message</small>
+            <input
+                    th:field="*{price}"
+                    th:errorclass="'is-invalid'"
+                    type="number"
+                   class="form-control"
+                   id="price"
+                   name="price"/>
+            <small
+                    th:each="error: ${#fields.errors('price')}"
+                    th:text="${error}"
+                    class="invalid-feedback text-danger">Price error message</small>
         </div>
 
         <div class="form-group">
@@ -49,10 +86,14 @@
             </div>
             <select class="browser-default custom-select" id="paper" name="paper">
                 <option>Select paper</option>
-                <option></option>
+                <option
+                th:each="paper : ${papers}"
+                th:value="${paper}"
+                th:text="${paper}"
+                ></option>
             </select>
 
-            <small class="bg-danger text-light rounded">Paper error message</small>
+<!--            <small class="bg-danger text-light rounded">Paper error message</small>-->
         </div>
 
         <div class="button-holder d-flex justify-content-center">

@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 
 public class StampDTO {
     @NotBlank
-    @Size(min = 5, max = 20)
+    @Size(min = 5, max = 20, message = "Name length must be between 5 and 20 characters!")
     private String name;
     @NotBlank
     @Size(min = 5, max = 25)
@@ -17,10 +17,8 @@ public class StampDTO {
     @NotBlank
     @Size(max = 150)
     private String imageURL;
-    @NotBlank
     @Positive
     private BigDecimal price;
-    @NotBlank
     private Paper paper;
 
     public String getName() {
