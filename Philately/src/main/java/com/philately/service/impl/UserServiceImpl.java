@@ -2,6 +2,7 @@ package com.philately.service.impl;
 
 import com.philately.model.dto.LoginUserDTO;
 import com.philately.model.dto.UserRegistrationDTO;
+import com.philately.model.entity.Stamp;
 import com.philately.model.entity.User;
 import com.philately.repository.UserRepository;
 import com.philately.service.CurrentUser;
@@ -9,6 +10,8 @@ import com.philately.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -60,6 +63,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public void userLogout() {
         currentUser.logout();
+    }
+
+    @Override
+    public User findById(long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Set<Stamp> getPurchasesStamp(Long id) {
+        return userRepository.findById(id).get().getPurchasedStamp();
+    }
+
+    @Override
+    public Set<Stamp> getMyWishlist(Long id) {
+        return userRepository.findById(id).get().getWishedStamp();
     }
 
 

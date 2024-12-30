@@ -12,6 +12,9 @@ import com.philately.service.StampService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Set;
+
 @Service
 public class StampServiceImpl implements StampService {
 
@@ -36,6 +39,17 @@ public class StampServiceImpl implements StampService {
         stamp.setPaper(paper);
         User user = userRepository.findById(currentUser.getId()).get();
         stamp.setOwner(user);
+        user.getAddedStamp().add(stamp);
         stampRepository.save(stamp);
+    }
+
+    @Override
+    public Set<Stamp> getAddedStamp(User user) {
+        return stampRepository.findByOwner(user);
+    }
+
+    @Override
+    public List<Stamp> getOthersStamp(User user) {
+        return stampRepository.findByOwnerIsNot(user);
     }
 }

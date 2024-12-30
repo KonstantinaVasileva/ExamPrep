@@ -20,6 +20,8 @@ public class User extends BaseEntity {
     private Set<Stamp> wishedStamp;
     @OneToMany
     private Set<Stamp> purchasedStamp;
+    @OneToMany
+    private Set<Stamp> addedStamp;
 
     public String getUsername() {
         return username;
@@ -62,5 +64,13 @@ public class User extends BaseEntity {
 
     public void setPurchasedStamp(Set<Stamp> purchasedStamp) {
         this.purchasedStamp = purchasedStamp;
+    }
+
+    public Set<Stamp> getAddedStamp() {
+        return addedStamp;
+    }
+
+    public void setAddedStamp(Set<Stamp> addedStamp) {
+        this.addedStamp = addedStamp;
     }
 }
