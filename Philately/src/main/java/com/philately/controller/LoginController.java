@@ -50,7 +50,7 @@ public class LoginController {
             );
             return "redirect:/users/login";
         }
-        return "redirect:/home";
+        return "redirect:/";
     }
 
     @PostMapping("/logout")

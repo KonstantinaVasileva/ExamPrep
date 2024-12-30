@@ -1,6 +1,7 @@
 package com.philately.model.dto;
 
 import com.philately.model.entity.Paper;
+import com.philately.model.enums.PaperType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -19,7 +20,7 @@ public class StampDTO {
     private String imageURL;
     @Positive
     private BigDecimal price;
-    private Paper paper;
+    private PaperType paper;
 
     public String getName() {
         return name;
@@ -53,11 +54,11 @@ public class StampDTO {
         this.price = price;
     }
 
-    public Paper getPaper() {
+    public PaperType getPaper() {
         return paper;
     }
 
-    public void setPaper(Paper paper) {
+    public void setPaper(PaperType paper) {
         this.paper = paper;
     }
 }
