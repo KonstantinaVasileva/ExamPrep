@@ -57,7 +57,7 @@ public class StampController {
             return "redirect:/stamps/add";
         }
         stampService.addStamp(stampDTO);
-        return "redirect:/home";
+        return "redirect:/";
     }
 
 }

@@ -51,6 +51,7 @@ public class UserServiceImpl implements UserService {
         if (equals) {
             currentUser.setUsername(user.getUsername());
             currentUser.setLoggedIn(true);
+            currentUser.setId(user.getId());
             return true;
         }
         return false;
