@@ -76,7 +76,7 @@
                             <div class="buttons-info">
                                 <div class="favorite">
                                     <p><a class="btn-outline-info btn"
-                                    th:href="@{/offers/add/{id}(id=${stamp.id})}"
+                                    th:href="@{/stamps/add-to-wish/{id}(id=${stamp.id})}"
                                     >To Wishlist
                                     </a>
                                     </p>
@@ -104,7 +104,7 @@
                                     $</td>
                                 <td style="width: 15%; padding-top: 8px; padding-right: 5px">
                                     <a class="btn-danger btn"
-                                       th:ref="@{/offers/remove/{id}(id=${wishStamp.id})}"
+                                       th:ref="@{/stamps/remove-from-wish/{id}(id=${wishStamp.id})}"
                                     >Remove</a>
                                 </td>
                             </tr>
@@ -112,7 +112,7 @@
                     </div>
                     <div class="buttons-info">
                         <p style="margin-top: 10px"><a class="btn-info btn"
-                        th:href="@{/offers/buy}"
+                        th:href="@{/stamps/buy}"
                         >Buy all
                         </a>
                         </p>
