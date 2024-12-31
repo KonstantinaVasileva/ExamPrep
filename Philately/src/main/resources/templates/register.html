@@ -48,7 +48,7 @@
                     th:field="*{password}"
                     type="password" class="form-control" id="password" name="password"
                     placeholder="Enter Password" />
-            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="bg-danger text-light rounded" style="font-size: 15px">Email error message</small>
+            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="bg-danger text-light rounded" style="font-size: 15px">Password error message</small>
 <!--            <small class="bg-danger text-light rounded">Password error message</small>-->
         </div>
 
@@ -64,10 +64,13 @@
                     name="confirmPassword"
 
                      placeholder="Confirm Password"/>
-            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="bg-danger text-light rounded" style="font-size: 15px">Email error message</small>
+<!--            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="bg-danger text-light rounded" style="font-size: 15px">Password error message</small>-->
 <!--                    th:unless="${#fields.hasErrors('confirmPassword')}"-->
 
-<!--            <small class="bg-danger text-light rounded">Password error message</small>-->
+            <small
+                    th:if="${#fields.hasErrors('confirmPassword')}"
+                    th:errors="*{confirmPassword}"
+                    class="bg-danger text-light rounded">Password error message</small>
         </div>
 <!--        <div th:if="${error}" th:text="${error}" style="color: red;"></div>-->
         <div class="button-holder d-flex justify-content-center">
