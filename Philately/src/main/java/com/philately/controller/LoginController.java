@@ -5,6 +5,7 @@ import com.philately.model.entity.User;
 import com.philately.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,11 @@ public class LoginController {
         return new LoginUserDTO();
     }
 
+    @ModelAttribute("login")
+    public void addAttribute(Model model) {
+        model.addAttribute("login");
+    }
+
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -37,13 +43,6 @@ public class LoginController {
     public String login(@Valid LoginUserDTO loginUserDTO,
                         BindingResult bindingResult,
                         RedirectAttributes redirectAttributes) {
-
-        User user = userService.findByUsername(loginUserDTO.getUsername());
-        if (user == null || !user.getPassword().equals(loginUserDTO.getPassword())) {
-            bindingResult.addError(
-                    new FieldError("incorrect-login", "username", "Incorrect username or password")
-            );
-        }
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("loginUserDTO", loginUserDTO);
@@ -56,7 +55,7 @@ public class LoginController {
         if (!login) {
             redirectAttributes.addFlashAttribute("loginUserDTO", loginUserDTO);
             redirectAttributes.addFlashAttribute(
-                    "org.springframework.validation.BindingResult.loginUserDTO", bindingResult
+                    "login", false
             );
             return "redirect:/users/login";
         }
