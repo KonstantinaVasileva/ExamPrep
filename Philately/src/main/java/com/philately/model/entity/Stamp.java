@@ -20,7 +20,7 @@ public class Stamp extends BaseEntity {
     @Column(nullable = false)
     private String imageURL;
     @ManyToOne
-    private User owner;
+    private User added;
 
     public String getName() {
         return name;
@@ -67,12 +67,11 @@ public class Stamp extends BaseEntity {
         return this;
     }
 
-    public User getOwner() {
-        return owner;
+    public User getAdded() {
+        return added;
     }
 
-    public Stamp setOwner(User owner) {
-        this.owner = owner;
-        return this;
+    public void setAdded(User added) {
+        this.added = added;
     }
 }

@@ -1,10 +1,12 @@
 package com.philately.controller;
 
 import com.philately.model.dto.LoginUserDTO;
+import com.philately.model.entity.User;
 import com.philately.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +37,14 @@ public class LoginController {
     public String login(@Valid LoginUserDTO loginUserDTO,
                         BindingResult bindingResult,
                         RedirectAttributes redirectAttributes) {
+
+        User user = userService.findByUsername(loginUserDTO.getUsername());
+        if (user == null || !user.getPassword().equals(loginUserDTO.getPassword())) {
+            bindingResult.addError(
+                    new FieldError("incorrect-login", "username", "Incorrect username or password")
+            );
+        }
+
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("loginUserDTO", loginUserDTO);
             redirectAttributes.addFlashAttribute(
@@ -53,7 +63,7 @@ public class LoginController {
         return "redirect:/";
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public String logout() {
         userService.userLogout();
         return "redirect:/";

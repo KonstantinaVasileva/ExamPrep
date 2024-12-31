@@ -29,16 +29,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean userRegistration(UserRegistrationDTO userRegistrationDTO) {
-        if (!userRegistrationDTO.getPassword().equals(userRegistrationDTO.getConfirmPassword())) {
+    public boolean userRegistrationIsValid(UserRegistrationDTO userRegistrationDTO) {
+//        if (!userRegistrationDTO.getPassword().equals(userRegistrationDTO.getConfirmPassword())) {
+//            return false;
+//        }
+        if (userRepository.existsByUsernameOrEmail(
+                userRegistrationDTO.getUsername(), userRegistrationDTO.getEmail())) {
             return false;
         }
-        if (userRepository.existsByUsernameOrEmail(userRegistrationDTO.getUsername(), userRegistrationDTO.getEmail())) {
-            return false;
-        }
-        User user = modelMapper.map(userRegistrationDTO, User.class);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+
         return true;
     }
 
@@ -57,6 +56,8 @@ public class UserServiceImpl implements UserService {
             currentUser.setId(user.getId());
             return true;
         }
+
+
         return false;
     }
 
@@ -78,6 +79,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public Set<Stamp> getMyWishlist(Long id) {
         return userRepository.findById(id).get().getWishedStamp();
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElse(null);
+    }
+
+    @Override
+    public void register(UserRegistrationDTO userRegistrationDTO) {
+        User user = modelMapper.map(userRegistrationDTO, User.class);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 
 

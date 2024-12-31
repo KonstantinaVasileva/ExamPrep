@@ -13,4 +13,10 @@ public interface StampService {
     Set<Stamp> getAddedStamp(User user);
 
     List<Stamp> getOthersStamp(User user);
+
+    void addToWishlist(long stampId, long userId);
+
+    void removeFromWishlist(long stampId, long userId);
+
+    void buyAllStamps(long id);
 }

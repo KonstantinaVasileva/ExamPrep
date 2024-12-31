@@ -29,7 +29,9 @@
                                 <td style="text-align: start">Used paper:
                                 <th:block th:text="${stamp.paper.name.name()}"></th:block>
                             </td>
-                                <td style="text-align: end; padding-right: 5px">Price: {stampsPrice}$
+                                <td style="text-align: end; padding-right: 5px">Price:
+                                    <th:block th:text="${stamp.price}"></th:block>
+                                    $
                                 </td>
                             </tr>
                         </table>
@@ -84,7 +86,7 @@
                             </div>
                             <div class="second-info">
                                 <p>Added by:
-                                <th:block th:text="${stamp.owner.username}"></th:block>
+                                <th:block th:text="${stamp.added.username}"></th:block>
                                 </p>
                                 <p></p>
                             </div>
@@ -96,7 +98,9 @@
                     <div class="wish-list" th:each="wishStamp : ${myWishlist}">
                         <table class="my-table">
                             <tr class="my-stamps">
-                                <td style="text-align: start; padding-left: 5px">{stampName}</td>
+                                <td style="text-align: start; padding-left: 5px">
+                                    <th:block th:text="${wishStamp.name}"></th:block>
+                                </td>
                                 <img th:src="${wishStamp.imageURL}" th:alt="${wishStamp.name}" width="55px"
                                      height="55" style="padding-top: 0.3em; padding-left: 0.3em">
                                 <td style="text-align: end; padding-right: 5px">Price:
@@ -104,7 +108,7 @@
                                     $</td>
                                 <td style="width: 15%; padding-top: 8px; padding-right: 5px">
                                     <a class="btn-danger btn"
-                                       th:ref="@{/stamps/remove-from-wish/{id}(id=${wishStamp.id})}"
+                                       th:href="@{/stamps/remove-from-wish/{id}(id=*{wishStamp.id})}"
                                     >Remove</a>
                                 </td>
                             </tr>

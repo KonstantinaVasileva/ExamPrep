@@ -4,8 +4,8 @@ import com.philately.model.dto.UserRegistrationDTO;
 import com.philately.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +37,12 @@ public class RegisterController {
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes) {
 
-        boolean registration = userService.userRegistration(userRegistrationDTO);
+        boolean registration = userService.userRegistrationIsValid(userRegistrationDTO);
+        if (!userRegistrationDTO.getPassword().equals(userRegistrationDTO.getConfirmPassword())) {
+            bindingResult.addError(
+                    new FieldError("different-password", "confirmPassword", "Passwords do not match")
+            );
+        }
         if (bindingResult.hasErrors() || !registration) {
             redirectAttributes.addFlashAttribute(
                     "userRegistrationDTO", userRegistrationDTO);
@@ -46,12 +51,7 @@ public class RegisterController {
             return "redirect:/users/register";
         }
 
-//        if (userRegistrationDTO.isPasswordsEqual()) {
-//            userService.userRegistration(userRegistrationDTO);
-//        } else {
-//            model.addAttribute("error", "Passwords do not match");
-//            return "register";
-//        }
+        userService.register(userRegistrationDTO);
         return "redirect:/users/login";
     }
 

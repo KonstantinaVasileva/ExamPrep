@@ -9,7 +9,7 @@ import java.util.Set;
 
 public interface UserService {
 
-    boolean userRegistration(UserRegistrationDTO userRegistrationDTO);
+    boolean userRegistrationIsValid(UserRegistrationDTO userRegistrationDTO);
 
     boolean userLogin(LoginUserDTO loginUserDTO);
 
@@ -20,4 +20,8 @@ public interface UserService {
     Set<Stamp> getPurchasesStamp(Long id);
 
     Set<Stamp> getMyWishlist(Long id);
+
+    User findByUsername(String username);
+
+    void register(UserRegistrationDTO userRegistrationDTO);
 }

@@ -1,16 +1,17 @@
 package com.philately.controller;
 
 import com.philately.model.dto.StampDTO;
+import com.philately.model.entity.Stamp;
+import com.philately.model.entity.User;
 import com.philately.model.enums.PaperType;
+import com.philately.repository.StampRepository;
+import com.philately.repository.UserRepository;
 import com.philately.service.CurrentUser;
 import com.philately.service.StampService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -62,6 +63,22 @@ public class StampController {
         return "redirect:/";
     }
 
+    @GetMapping("/add-to-wish/{id}")
+    public String addToWishlist(@PathVariable long id){
+        stampService.addToWishlist(id, currentUser.getId());
+        return "redirect:/";
+    }
 
+    @GetMapping("/remove-from-wish/{id}")
+    public String removeFromWishlist(@PathVariable long id){
+        stampService.removeFromWishlist(id, currentUser.getId());
+        return "redirect:/";
+    }
+
+    @GetMapping("/buy")
+    public String buyAll(){
+        stampService.buyAllStamps(currentUser.getId());
+        return "redirect:/";
+    }
 
 }

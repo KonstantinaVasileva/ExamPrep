@@ -1,9 +1,6 @@
 package com.philately.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Set;
 
@@ -16,12 +13,11 @@ public class User extends BaseEntity {
     private String password;
     @Column(nullable = false, unique = true)
     private String email;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_wished_stamps")
     private Set<Stamp> wishedStamp;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Stamp> purchasedStamp;
-    @OneToMany
-    private Set<Stamp> addedStamp;
 
     public String getUsername() {
         return username;
@@ -66,11 +62,4 @@ public class User extends BaseEntity {
         this.purchasedStamp = purchasedStamp;
     }
 
-    public Set<Stamp> getAddedStamp() {
-        return addedStamp;
-    }
-
-    public void setAddedStamp(Set<Stamp> addedStamp) {
-        this.addedStamp = addedStamp;
-    }
 }

@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Repository
 public interface StampRepository extends JpaRepository<Stamp, Long> {
-    Set<Stamp> findByOwner(User user);
+    Set<Stamp> findByAdded(User user);
 
-    List<Stamp> findByOwnerIsNot(User owner);
+    List<Stamp> findByAddedIsNot(User owner);
 }
