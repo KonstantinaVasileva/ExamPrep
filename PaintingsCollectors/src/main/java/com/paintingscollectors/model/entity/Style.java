@@ -14,6 +14,14 @@ public class Style extends BaseEntity{
     @Column(nullable = false)
     private String description;
 
+    public Style() {
+    }
+
+    public Style(StyleType name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public StyleType getName() {
         return name;
     }
