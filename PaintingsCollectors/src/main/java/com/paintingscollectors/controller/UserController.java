@@ -1,5 +1,6 @@
 package com.paintingscollectors.controller;
 
+import com.paintingscollectors.model.dto.LoginUserDTO;
 import com.paintingscollectors.model.dto.RegisterUserDTO;
 import com.paintingscollectors.service.LoggedInUser;
 import com.paintingscollectors.service.UserService;
@@ -27,6 +28,11 @@ public class UserController {
     @ModelAttribute("registerUserDTO")
     public RegisterUserDTO registerUserDTO() {
         return new RegisterUserDTO();
+    }
+
+    @ModelAttribute("loginUserDTO")
+    public LoginUserDTO loginUserDTO() {
+        return new LoginUserDTO();
     }
 
     @GetMapping("/register")
@@ -57,22 +63,47 @@ public class UserController {
             );
         }
 
-        if (bindingResult.hasErrors()) {
+        boolean register = userService.userRegister(registerUserDTO);
+        if (bindingResult.hasErrors() || !register) {
             redirectAttributes.addFlashAttribute("registerUserDTO", registerUserDTO);
             redirectAttributes.addFlashAttribute(
                     "org.springframework.validation.BindingResult.registerUserDTO", bindingResult);
             return "redirect:/register";
         }
 
-        userService.userRegister(registerUserDTO);
+        userService.register(registerUserDTO);
 
         return "redirect:/login";
     }
 
 
     @PostMapping("/login")
-    public String loginUser() {
-//        userService.login()
+    public String loginUser(@Valid LoginUserDTO loginUserDTO,
+                            BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes) {
+
+        if (loggedInUser.isLoggedIn()) {
+            return "redirect:/home";
+        }
+
+        boolean login = userService.login(loginUserDTO);
+
+        if (!login){
+            bindingResult.addError(
+                    new FieldError("loginUserDTO", "password", "Invalid username or password")
+            );
+        }
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("loginUserDTO", loginUserDTO);
+            redirectAttributes.addFlashAttribute(
+                    "org.springframework.validation.BindingResult.loginUserDTO", bindingResult);
+
+            return "redirect:/login";
+        }
+
+        loggedInUser.login(loginUserDTO.getUsername());
+
         return "redirect:/home";
     }
 
