@@ -12,6 +12,8 @@ import com.paintingscollectors.service.PaintingService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PaintingServiceImpl implements PaintingService {
 
@@ -38,5 +40,23 @@ public class PaintingServiceImpl implements PaintingService {
         Style style = styleRepository.findByName(paintingDTO.getStyle());
         painting.setStyle(style);
         paintingRepository.save(painting);
+    }
+
+    @Override
+    public List<Painting> getMyPainting(User user) {
+        return paintingRepository.findAllByOwner(user);
+    }
+
+    @Override
+    public List<Painting> getOtherUserPainting(User owner) {
+        return paintingRepository.findAllByOwnerNot(owner);
+    }
+
+    @Override
+    public List<Painting> getMostRatedPainting() {
+        return paintingRepository.findByOrderByVotesDesc()
+                .stream()
+                .limit(2)
+                .toList();
     }
 }

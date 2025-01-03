@@ -2,12 +2,15 @@ package com.paintingscollectors.service.impl;
 
 import com.paintingscollectors.model.dto.LoginUserDTO;
 import com.paintingscollectors.model.dto.RegisterUserDTO;
+import com.paintingscollectors.model.entity.Painting;
 import com.paintingscollectors.model.entity.User;
 import com.paintingscollectors.repository.UserRepository;
 import com.paintingscollectors.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -47,4 +50,16 @@ public class UserServiceImpl implements UserService {
 
         return true;
     }
+
+    @Override
+    public User findUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public Set<Painting> myFavoritePainting(String username) {
+        return userRepository.findByUsername(username).getFavoritePaintings();
+    }
+
+
 }
