@@ -63,14 +63,31 @@ public class PaintingServiceImpl implements PaintingService {
     @Override
     public void removePainting(long id) {
         Painting painting = paintingRepository.findById(id).get();
-        User user = userRepository.findByUsername(loggedInUser.getUsername());
-        if (painting.isFavorite()){
+
+        if (painting.isFavorite()) {
             return;
         }
         paintingRepository.delete(painting);
-//        user.getFavoritePaintings().remove(painting);
-//        userRepository.save(user);
-
-
     }
+
+    @Override
+    public void addToFavorite(long id) {
+        Painting painting = paintingRepository.findById(id).get();
+        User user = userRepository.findByUsername(loggedInUser.getUsername());
+        user.getFavoritePaintings().add(painting);
+        painting.setFavorite(true);
+        paintingRepository.save(painting);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void removeFromFavorite(long id) {
+        User user = userRepository.findByUsername(loggedInUser.getUsername());
+        Painting painting = user.getFavoritePaintings().stream().filter(p->p.getId() == id).findFirst().get();
+        user.getFavoritePaintings().remove(painting);
+        painting.setFavorite(false);
+        paintingRepository.save(painting);
+        userRepository.save(user);
+    }
+
 }

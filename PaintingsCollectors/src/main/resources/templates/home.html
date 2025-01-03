@@ -66,9 +66,11 @@
                                 <th:block th:text="${painting.author}"></th:block>
                                 </td>
                                 <td>owner:
-                                <th:block th:text="${painting.owner}"></th:block>
+                                <th:block th:text="${painting.owner.username}"></th:block>
                                 </td>
-                                <td><a>                                               <!--//TODO--><!--<a th:href="@{/paintings/remove-favorites...">-->
+                                <td><a
+                                th:href="@{/painting/remove-favorite/{id}(id=${painting.id})}"
+                                >                                               <!--//TODO--><!--<a th:href="@{/paintings/remove-favorites...">-->
                                     <img class="mr-2"
                                          src="/img/remove.png"
                                          alt="Remove"

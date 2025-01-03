@@ -70,5 +70,22 @@ public class PaintingController {
         return "redirect:/home";
     }
 
+    @GetMapping("/favorite/{id}")
+    public String favorite(@PathVariable long id) {
+        if (!loggedInUser.isLoggedIn()) {
+            return "redirect:/login";
+        }
+        paintingService.addToFavorite(id);
+        return "redirect:/home";
+    }
+
+    @GetMapping("/remove-favorite/{id}")
+    public String removeFavorite(@PathVariable long id) {
+        if (!loggedInUser.isLoggedIn()) {
+            return "redirect:/login";
+        }
+        paintingService.removeFromFavorite(id);
+        return "redirect:/home";
+    }
 
 }

@@ -17,4 +17,8 @@ public interface PaintingService {
     List<Painting> getMostRatedPainting();
 
     void removePainting(long id);
+
+    void addToFavorite(long id);
+
+    void removeFromFavorite(long id);
 }
