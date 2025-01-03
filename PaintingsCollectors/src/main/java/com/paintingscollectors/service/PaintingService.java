@@ -15,4 +15,6 @@ public interface PaintingService {
     List<Painting> getOtherUserPainting(User user);
 
     List<Painting> getMostRatedPainting();
+
+    void removePainting(long id);
 }

@@ -6,10 +6,7 @@ import com.paintingscollectors.service.LoggedInUser;
 import com.paintingscollectors.service.PaintingService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -61,6 +58,15 @@ public class PaintingController {
 
         paintingService.addPainting(paintingDTO);
 
+        return "redirect:/home";
+    }
+
+    @GetMapping("/remove/{id}")
+    public String remove(@PathVariable long id) {
+        if (!loggedInUser.isLoggedIn()) {
+            return "redirect:/login";
+        }
+        paintingService.removePainting(id);
         return "redirect:/home";
     }
 
