@@ -54,7 +54,7 @@ public class PaintingServiceImpl implements PaintingService {
 
     @Override
     public List<Painting> getMostRatedPainting() {
-        return paintingRepository.findByOrderByVotesDesc()
+        return paintingRepository.findByOrderByVotesDescNameAsc()
                 .stream()
                 .limit(2)
                 .toList();
@@ -88,6 +88,13 @@ public class PaintingServiceImpl implements PaintingService {
         painting.setFavorite(false);
         paintingRepository.save(painting);
         userRepository.save(user);
+    }
+
+    @Override
+    public void votePainting(long id) {
+        Painting painting = paintingRepository.findById(id).get();
+        painting.setVotes(painting.getVotes() + 1);
+        paintingRepository.save(painting);
     }
 
 }

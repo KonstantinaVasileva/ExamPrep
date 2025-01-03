@@ -13,5 +13,5 @@ public interface PaintingRepository extends JpaRepository<Painting, Long> {
 
     List<Painting> findAllByOwnerNot(User owner);
 
-    List<Painting> findByOrderByVotesDesc();
+    List<Painting> findByOrderByVotesDescNameAsc();
 }

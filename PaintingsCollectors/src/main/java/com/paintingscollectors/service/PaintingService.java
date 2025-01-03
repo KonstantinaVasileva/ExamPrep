@@ -21,4 +21,6 @@ public interface PaintingService {
     void addToFavorite(long id);
 
     void removeFromFavorite(long id);
+
+    void votePainting(long id);
 }

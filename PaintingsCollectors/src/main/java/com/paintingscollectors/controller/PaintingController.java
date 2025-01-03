@@ -88,4 +88,13 @@ public class PaintingController {
         return "redirect:/home";
     }
 
+    @GetMapping("/vote/{id}")
+    public String vote(@PathVariable long id) {
+        if (!loggedInUser.isLoggedIn()) {
+            return "redirect:/login";
+        }
+        paintingService.votePainting(id);
+        return "redirect:/home";
+    }
+
 }
