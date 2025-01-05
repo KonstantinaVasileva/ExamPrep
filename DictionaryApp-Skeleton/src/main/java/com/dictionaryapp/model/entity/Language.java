@@ -1,13 +1,12 @@
 package com.dictionaryapp.model.entity;
 
 import com.dictionaryapp.model.enums.LanguageType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "languages")
 public class Language extends BaseEntity {
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, unique = true)
     private LanguageType name;
     @Column(nullable = false)
