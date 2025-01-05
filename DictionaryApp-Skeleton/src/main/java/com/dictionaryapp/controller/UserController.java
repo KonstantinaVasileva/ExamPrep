@@ -99,6 +99,7 @@ public class UserController {
         }
 
         currentUser.login(loginUserDTO.getUsername());
+        currentUser.setId(userServiceImpl.getUserId(loginUserDTO));
         return "redirect:/home";
     }
 

@@ -13,8 +13,8 @@ public class User extends BaseEntity {
     private String password;
     @Column(nullable = false, unique = true)
     private String email;
-    @OneToMany
-    @JoinColumn(name = "added_word", unique = true)
+    @OneToMany(mappedBy = "addedBy")
+//    @JoinColumn(name = "added_word", unique = true)
     private Set<Word> addedWord;
 
     public String getUsername() {

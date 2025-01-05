@@ -36,4 +36,9 @@ public class UserServiceImpl {
         User user = userRepository.findByUsername(loginUserDTO.getUsername()).orElse(null);
         return user != null && passwordEncoder.matches(loginUserDTO.getPassword(), user.getPassword());
     }
+
+    public long getUserId(LoginUserDTO loginUserDTO) {
+        User user = userRepository.findByUsername(loginUserDTO.getUsername()).orElse(null);
+        return user != null ? user.getId() : 0;
+    }
 }
