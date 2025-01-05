@@ -23,7 +23,7 @@ public class HomeController {
 
     @GetMapping("/home")
     public String usersHome() {
-        if (currentUser.isLoggedIn()) {
+        if (!currentUser.isLoggedIn()) {
             return "redirect:/";
         }
         return "home";
