@@ -29,8 +29,6 @@ public class TaskService {
         Priority priority = priorityRepository.findByName(addTaskDTO.getPriority());
         task.setPriority(priority);
         task.setDueDate(addTaskDTO.getDueDate());
-        User user = userRepository.findById(currentUser.getId()).get();
-        task.setUser(user);
         taskRepository.save(task);
     }
 }
