@@ -7,6 +7,7 @@ import com.dictionaryapp.service.WordService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -49,6 +50,18 @@ public class HomeController {
         model.addAttribute("allWords", allWords);
 
         return "home";
+    }
+
+    @GetMapping("/home/remove/{id}")
+    public String removeWord(@PathVariable long id) {
+        wordService.removeWordById(id);
+        return "redirect:/home";
+    }
+
+    @GetMapping("/home/remove-all")
+    public String removeAllWords() {
+        wordService.removeAllWords();
+        return "redirect:/home";
     }
 
 }

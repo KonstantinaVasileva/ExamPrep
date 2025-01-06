@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-public class AddWordController {
+public class WordController {
 
     private final CurrentUser currentUser;
     private final WordService wordService;
 
-    public AddWordController(CurrentUser currentUser, WordService wordService) {
+    public WordController(CurrentUser currentUser, WordService wordService) {
         this.currentUser = currentUser;
         this.wordService = wordService;
     }

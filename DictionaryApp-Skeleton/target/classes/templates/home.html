@@ -27,7 +27,7 @@
                         <br>
                         <span>Added by:
                             <th:block th:text="${word.addedBy.username} + ' on ' + ${word.inputDate}"></th:block></span>
-                        <a class="ml-3 text-danger" href="/homr/remove-deu">Remove</a>
+                        <a class="ml-3 text-danger" th:href="@{/home/remove/{id}(id=*{word.id})}">Remove</a>
                     </div>
                 </th:block>
             </div>
@@ -49,7 +49,7 @@
                         <span>Added by:
                         <th:block th:text="${word.addedBy.username} + ' on ' + ${word.inputDate}"></th:block>
                         </span>
-                        <a class="ml-3 text-danger" href="/home/remove-es">Remove</a>
+                        <a class="ml-3 text-danger" th:href="@{/home/remove/{id}(id=*{word.id})}">Remove</a>
                     </div>
                         </th:block>
                 </div>
@@ -75,7 +75,7 @@
                         <span>Added by:
                         <th:block th:text="${word.addedBy.username} + ' on ' + ${word.inputDate}"></th:block>
                         </span>
-                        <a class="ml-3 text-danger" href="/home/remove-fr">Remove</a>
+                        <a class="ml-3 text-danger" th:href="@{/home/remove/{id}(id=*{word.id})}">Remove</a>
                     </div>
                 </th:block>
             </div>
@@ -98,7 +98,7 @@
                         <span>Added by:
                         <th:block th:text="${word.addedBy.username} + ' on ' + ${word.inputDate}"></th:block>
                         </span>
-                        <a class="ml-3 text-danger" href="/home/remove-it">Remove</a>
+                        <a class="ml-3 text-danger" th:href="@{/home/remove/{id}(id=*{word.id})}">Remove</a>
                     </div>
                 </th:block>
             </div>

@@ -42,4 +42,12 @@ public class WordService {
     public List<Word> getGermanyWord(LanguageType language) {
         return wordRepository.findByLanguage_Name(language);
     }
+
+    public void removeWordById(long id) {
+        wordRepository.deleteById(id);
+    }
+
+    public void removeAllWords() {
+        wordRepository.deleteAll();
+    }
 }
