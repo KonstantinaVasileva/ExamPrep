@@ -5,16 +5,16 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class RegisterUserDTO {
-    @NotBlank
+    @NotBlank(message = "Username is required!")
     @Size(min = 3, max = 20, message = "Username length must be between 3 and 20 characters!")
     private String username;
-    @NotBlank
+    @NotBlank(message = "Email is required!")
     @Email
     private String email;
-    @NotBlank
+    @NotBlank(message = "Password is required!")
     @Size(min = 3, max = 20,message = "Password length must be between 3 and 20 characters!")
     private String password;
-    @NotBlank
+    @NotBlank(message = "Must confirm password!")
     @Size(min = 3, max = 20, message = "")
     private String confirmPassword;
 

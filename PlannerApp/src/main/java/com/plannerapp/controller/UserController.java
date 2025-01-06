@@ -5,6 +5,7 @@ import com.plannerapp.model.dto.RegisterUserDTO;
 import com.plannerapp.service.CurrentUser;
 import com.plannerapp.service.UserServiceImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,11 @@ public class UserController {
         return new LoginUserDTO();
     }
 
+    @ModelAttribute("login")
+    public void addAttributes(Model model) {
+        model.addAttribute("login");
+    }
+
     @GetMapping("/login")
     public String login() {
         if (currentUser.isLoggedIn()) {
@@ -67,12 +73,12 @@ public class UserController {
             redirectAttributes.addFlashAttribute("registerUserDTO", registerUserDTO);
             redirectAttributes.addFlashAttribute(
                     "org.springframework.validation.BindingResult.registerUserDTO", bindingResult);
-            return "redirect:/user/register";
+            return "redirect:/users/register";
         }
 
         userServiceImpl.registration(registerUserDTO);
 
-        return "redirect:/user/login";
+        return "redirect:/users/login";
     }
 
     @PostMapping("/login")
@@ -84,13 +90,13 @@ public class UserController {
             redirectAttributes.addFlashAttribute("loginUserDTO", loginUserDTO);
             redirectAttributes.addFlashAttribute(
                     "org.springframework.validation.BindingResult.loginUserDTO", bindingResult);
-            return "redirect:/user/login";
+            return "redirect:/users/login";
         }
         boolean login = userServiceImpl.login(loginUserDTO);
         if (!login) {
             redirectAttributes.addFlashAttribute("loginUserDTO", loginUserDTO);
             redirectAttributes.addFlashAttribute("login", false);
-            return "redirect:/user/login";
+            return "redirect:/users/login";
         }
 
         currentUser.login(loginUserDTO.getUsername());

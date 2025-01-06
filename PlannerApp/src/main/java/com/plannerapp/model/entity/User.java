@@ -15,7 +15,7 @@ public class User extends BaseEntity {
     private String password;
     @Column(nullable = false, unique = true)
     private String email;
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<Task> assignedTasks;
 
     public String getUsername() {
