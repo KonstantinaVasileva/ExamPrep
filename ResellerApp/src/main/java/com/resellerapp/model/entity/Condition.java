@@ -1,14 +1,14 @@
 package com.resellerapp.model.entity;
 
 import com.resellerapp.model.ConditionName;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
 public class Condition {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @Column(nullable = false, unique = true)
     @Enumerated(EnumType.STRING)
