@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -47,5 +48,9 @@ public class UserService {
             throw new RuntimeException("Wrong password");
         }
         return user;
+    }
+
+    public User getById(UUID userId) {
+        return userRepository.findById(userId).orElse(null);
     }
 }

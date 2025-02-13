@@ -2,9 +2,11 @@ package com.resellerapp.model.entity;
 
 import com.resellerapp.model.ConditionName;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.util.UUID;
 
+@Getter
 @Entity
 public class Condition {
     @Id
@@ -16,26 +18,14 @@ public class Condition {
     @Column(nullable = false)
     private String description;
 
-    public UUID getId() {
-        return id;
-    }
-
     public Condition setId(UUID id) {
         this.id = id;
         return this;
     }
 
-    public ConditionName getName() {
-        return name;
-    }
-
     public Condition setName(ConditionName name) {
         this.name = name;
         return this;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public Condition setDescription(String description) {

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.UUID;
+
 @Controller
 public class IndexController {
 
@@ -24,6 +26,16 @@ public class IndexController {
     @GetMapping("/")
     public String index() {
         return "index";
+    }
+
+    @GetMapping("/home")
+    public ModelAndView home(HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("home");
+        UUID userId = (UUID) session.getAttribute("user_id");
+        User user = userService.getById(userId);
+        modelAndView.addObject("user", user);
+        return modelAndView;
     }
 
     @GetMapping("/register")
@@ -61,7 +73,7 @@ public class IndexController {
         }
 
         User user = userService.loginUser(loginRequest);
-        session.setAttribute("userId", user.getId());
+        session.setAttribute("user_id", user.getId());
         return "redirect:/home";
     }
 }
