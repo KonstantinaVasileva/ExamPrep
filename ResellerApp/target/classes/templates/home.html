@@ -10,7 +10,7 @@
             <div class="col-6 mt-1 mb-1">
                 <div>
                     <h3 class="mySticky bg-gray text-dark  mb-0 mt-2">My Offers</h3>
-                    <h6 class="mySticky bg-gray text-dark  mb-0 mt-0">Username: {loggedUsername}</h6>
+                    <h6 class="mySticky bg-gray text-dark  mb-0 mt-0">Username: <span th:text="${user.username}"></span></h6>
                     <div class="bg-dark rounded m-auto" style="height: 31vh; overflow: auto">
                         <table class="table table-striped table-dark">
                             <tr>

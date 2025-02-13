@@ -1,5 +1,5 @@
 package com.resellerapp.model;
 
-public enum ConditionName {
+public enum ConditionType {
     EXCELLENT, GOOD, ACCEPTABLE
 }

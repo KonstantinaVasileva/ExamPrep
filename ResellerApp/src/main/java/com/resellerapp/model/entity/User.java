@@ -8,6 +8,7 @@ import java.util.UUID;
 
 @Getter
 @Entity
+@Table(name = "Users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -22,10 +23,10 @@ public class User {
     @Column(nullable = false, unique=true)
     private String email;
 
-    @OneToMany
+    @OneToMany(mappedBy = "ownerUser")
     private List<Offer> offers;
 
-    @OneToMany
+    @OneToMany(mappedBy = "buyerUser")
     private List<Offer> boughtOffers;
 
     public User setId(UUID id) {
