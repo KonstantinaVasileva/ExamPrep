@@ -2,7 +2,9 @@ package com.resellerapp.controller;
 
 import com.resellerapp.model.dto.LoginRequest;
 import com.resellerapp.model.dto.RegisterRequest;
+import com.resellerapp.model.entity.Offer;
 import com.resellerapp.model.entity.User;
+import com.resellerapp.service.OfferService;
 import com.resellerapp.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -12,15 +14,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.UUID;
 
 @Controller
 public class IndexController {
 
     private final UserService userService;
+    private final OfferService offerService;
 
-    public IndexController(UserService userService) {
+    public IndexController(UserService userService, OfferService offerService) {
         this.userService = userService;
+        this.offerService = offerService;
     }
 
     @GetMapping("/")
@@ -35,6 +40,8 @@ public class IndexController {
         UUID userId = (UUID) session.getAttribute("user_id");
         User user = userService.getById(userId);
         modelAndView.addObject("user", user);
+        List<Offer> myOffers = offerService.getMyOffers(userId);
+        modelAndView.addObject("myOffers", myOffers);
         return modelAndView;
     }
 

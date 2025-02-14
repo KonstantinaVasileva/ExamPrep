@@ -8,9 +8,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.UUID;
@@ -47,6 +45,12 @@ public class OfferController {
         User user = userService.getById(userId);
 
         offerService.addOffer(newOffer, user);
+        return "redirect:/home";
+    }
+
+    @GetMapping("/remove/{id}")
+    public String removeOffer(@PathVariable UUID id) {
+        offerService.removeOffers(id);
         return "redirect:/home";
     }
 

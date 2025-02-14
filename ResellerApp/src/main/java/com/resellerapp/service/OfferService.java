@@ -6,6 +6,9 @@ import com.resellerapp.model.entity.User;
 import com.resellerapp.repository.OfferRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.UUID;
+
 @Service
 public class OfferService {
     private final OfferRepository offerRepository;
@@ -22,5 +25,13 @@ public class OfferService {
                 .setOwnerUser(user);
 
         offerRepository.save(offer);
+    }
+
+    public List<Offer> getMyOffers(UUID userId) {
+        return offerRepository.findByOwnerUser_Id(userId);
+    }
+
+    public void removeOffers(UUID id) {
+        offerRepository.deleteById(id);
     }
 }
