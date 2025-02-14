@@ -40,8 +40,15 @@ public class IndexController {
         UUID userId = (UUID) session.getAttribute("user_id");
         User user = userService.getById(userId);
         modelAndView.addObject("user", user);
+
         List<Offer> myOffers = offerService.getMyOffers(userId);
         modelAndView.addObject("myOffers", myOffers);
+
+        List<Offer> othersOffers = offerService.getOtherOffers(userId);
+        modelAndView.addObject("othersOffers", othersOffers);
+
+        List<Offer> boughtOffers = offerService.getMyBoughtOffers(userId);
+        modelAndView.addObject("boughtOffers", boughtOffers);
         return modelAndView;
     }
 
@@ -82,5 +89,11 @@ public class IndexController {
         User user = userService.loginUser(loginRequest);
         session.setAttribute("user_id", user.getId());
         return "redirect:/home";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
     }
 }

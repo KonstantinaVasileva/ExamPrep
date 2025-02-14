@@ -10,7 +10,7 @@ spring:
   mvc:
     hiddenmethod:
       filter:
-        enabled: 'true'
+        enabled: true
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     password: '1234'

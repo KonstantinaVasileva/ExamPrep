@@ -54,5 +54,12 @@ public class OfferController {
         return "redirect:/home";
     }
 
+    @GetMapping("/buy/{id}")
+    public String buyOffer(@PathVariable UUID id, HttpSession session) {
+        UUID userId = (UUID) session.getAttribute("user_id");
+        User user = userService.getById(userId);
 
+        offerService.buyOffers(id, user);
+        return "redirect:/home";
+    }
 }

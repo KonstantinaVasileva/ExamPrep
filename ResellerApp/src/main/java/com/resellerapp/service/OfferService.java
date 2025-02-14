@@ -7,6 +7,7 @@ import com.resellerapp.repository.OfferRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -33,5 +34,22 @@ public class OfferService {
 
     public void removeOffers(UUID id) {
         offerRepository.deleteById(id);
+    }
+
+    public List<Offer> getOtherOffers(UUID userId) {
+        return offerRepository.findByOwnerUserIdIsNot(userId);
+    }
+
+    public List<Offer> getMyBoughtOffers(UUID userId) {
+        return offerRepository.findByBuyerUser_Id(userId);
+    }
+
+    public void buyOffers(UUID offerId, User user) {
+        Optional<Offer> offerById = offerRepository.getOfferById(offerId);
+        Offer offer = offerById.get();
+        offer.setBuyerUser(user);
+        offer.setOwnerUser(null);
+
+        offerRepository.save(offer);
     }
 }
